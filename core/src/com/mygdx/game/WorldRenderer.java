@@ -55,11 +55,8 @@ public class WorldRenderer extends WorldController {
     {
         long t1 = System.nanoTime();
         batch.setProjectionMatrix(camera.combined);
+        //batch.setProjectionMatrix(camera2.combined);
         batch.begin();
-
-
-
-
         backgroundImg.yCoordBg1 += backgroundImg.BACKGROUND_MOVE_SPEED * Gdx.graphics.getDeltaTime();
         backgroundImg.yCoordBg2 = backgroundImg.yCoordBg1 + backgroundImg.yMax;  // We move the background, not the camera
         if (backgroundImg.yCoordBg1 >= 0) {
@@ -87,6 +84,7 @@ public class WorldRenderer extends WorldController {
         //Gdx.app.error("TIME", delt+" ns");
         this.moveCamera(controller.player.position.x);
         camera.update();
+        camera2.update();
 
     }
 
