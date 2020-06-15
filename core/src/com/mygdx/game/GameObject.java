@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class GameObject {
     public Vector2 position;
+    public Vector2 target;
     public float speed;
     public float width;
     public float height;
@@ -29,10 +30,9 @@ public class GameObject {
     public void update(float delta){
 
     }
-    public void lookAt(Vector2 target) {
+    public void lookAt(Player target) {
 
-        float angle = (float) Math.atan2(target.y - this.position.y, target.x
-                - this.position.x);
+        float angle = (float) Math.atan2(target.position.y - this.position.y, target.position.x - this.position.x);
         angle = (float) (angle * (180 / Math.PI));
 
         setAngle(angle);

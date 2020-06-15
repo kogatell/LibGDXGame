@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 
@@ -49,6 +50,7 @@ public class WorldRenderer extends WorldController {
         batch.begin();
 
 
+
         for(GameObject go: controller.gameObjects) {
             go.getCurrentSprite().setPosition(go.position.x, go.position.y);
             go.getCurrentSprite().setSize(go.width,go.height);
@@ -62,16 +64,24 @@ public class WorldRenderer extends WorldController {
         background.updateAndRender(Gdx.graphics.getDeltaTime(), batch);
 
         //o el get
+
         batch.end();
         long t2 = System.nanoTime();
         long delt = t2 - t1;
         //Gdx.app.error("TIME", delt+" ns");
+        this.moveCamera(controller.player.position.x, controller.player.position.y);
+
     }
 
     public void resize(float width, float height)
     {
         camera.viewportWidth = (Constants.VIEWPORT_HEIGHT/height)*width;
         camera.update();
+    }
+
+    public void moveCamera(float x, float y)
+    {
+        camera.position.set(x, y, 0);
     }
 
     public void dispose()

@@ -24,6 +24,7 @@ public class WorldController {
     ArrayList<GameObject> goToDestroy = new ArrayList<GameObject>();
     float asteroidSpawnTimer;
     float shootingEnemySpawnTimer;
+    float chaseEnemySpawnTimeTimer;
     float x, y;
     float score;
     public static final float MIN_ASTEROID_SPAWN_TIME = 1f;
@@ -101,6 +102,7 @@ public class WorldController {
         }
         asteroidSpawnTimer -= deltaTime;
         shootingEnemySpawnTimer -= deltaTime;
+        chaseEnemySpawnTimeTimer -= deltaTime;
         if (asteroidSpawnTimer <= 0) {
             Gdx.app.error("Hola","Creo asteroide");
             asteroidSpawnTimer = random.nextFloat() * (MAX_ASTEROID_SPAWN_TIME - MIN_ASTEROID_SPAWN_TIME) + MIN_ASTEROID_SPAWN_TIME;
@@ -111,12 +113,23 @@ public class WorldController {
             shootingEnemySpawnTimer = random.nextFloat() * (MAX_SHOOTING_ENEMY_SPAWN_TIME - MIN_SHOOTING_ENEMY_SPAWN_TIME) + MIN_SHOOTING_ENEMY_SPAWN_TIME;
             gameObjects.add(new ShootingEnemy(random.nextInt( (int) ((2*Constants.VIEWPORT_WIDTH) - ShootingEnemy.WIDTH)) - (Constants.VIEWPORT_WIDTH - ShootingEnemy.WIDTH)));
         }
+        if(chaseEnemySpawnTimeTimer <= 0)
+        {
+            Gdx.app.error("Hola","Creo Chase Enemy");
+            chaseEnemySpawnTimeTimer = random.nextFloat() * (MAX_CHASE_ENEMY_SPAWN_TIME - MIN_CHASE_ENEMY_SPAWN_TIME) + MIN_CHASE_ENEMY_SPAWN_TIME;
+            gameObjects.add(new ChaseEnemy(random.nextInt( (int) ((2*Constants.VIEWPORT_WIDTH) - ChaseEnemy.WIDTH)) - (Constants.VIEWPORT_WIDTH - ChaseEnemy.WIDTH)));
+        }
         for(GameObject go: gameObjects)
         {
             go.update(deltaTime);
         }
         ArrayList<GameObject> gameObjectsCopy = (ArrayList<GameObject>) gameObjects.clone();
         for (GameObject go: gameObjectsCopy){
+            if(go.typeOfGO == 7)
+            {
+                go.lookAt(player);
+
+            }
             if(go.typeOfGO == 4) {
                 go.shootingTimer -= deltaTime;
                 if (go.shootingTimer <= 0) {
@@ -143,6 +156,12 @@ public class WorldController {
                     goToDestroy.add(go);
                     //gameObjects.removeAll(goToDestroy);
                     health--;
+               }
+               if(go.getCollisionRect().collidesWith(player.getCollisionRect()) && go.typeOfGO == 1 || go.getCollisionRect().collidesWith(player.getCollisionRect()) && go.typeOfGO == 7 || go.getCollisionRect().collidesWith(player.getCollisionRect()) && go.typeOfGO == 7)
+               {
+                   goToDestroy.add(go);
+                   //gameObjects.removeAll(goToDestroy);
+                   health--;
                }
                if (go.getCollisionRect().collidesWith(go2.getCollisionRect()) && go.typeOfGO == 0 && go2.typeOfGO == 1 || go.getCollisionRect().collidesWith(go2.getCollisionRect()) && go.typeOfGO == 0 && go2.typeOfGO == 4){
                     x = go.position.x;

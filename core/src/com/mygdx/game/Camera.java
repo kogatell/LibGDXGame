@@ -1,4 +1,4 @@
-
+package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,7 +12,7 @@ public class Camera {
     private OrthographicCamera cam;
     private StretchViewport viewport;
 
-    public Camera (int width, int height) {
+    public Camera (float width, float height) {
         cam = new OrthographicCamera();
         viewport = new StretchViewport(width, height, cam);
         viewport.apply();
