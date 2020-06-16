@@ -12,7 +12,7 @@ public class Controller {
     OrthographicCamera camera;
     public Controller()
     {
-        camera = new OrthographicCamera():
-        viewport = new FitViewport(800, 480):
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(800, 480);
     }
 }
