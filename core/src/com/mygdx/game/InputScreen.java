@@ -4,8 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 
-public class InputScreen implements GestureDetector.GestureListener {
+public class InputScreen implements GestureDetector.GestureListener, EventListener {
     static public Player player;
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
@@ -60,5 +62,10 @@ public class InputScreen implements GestureDetector.GestureListener {
     @Override
     public void pinchStop() {
 
+    }
+
+    @Override
+    public boolean handle(Event event) {
+        return false;
     }
 }

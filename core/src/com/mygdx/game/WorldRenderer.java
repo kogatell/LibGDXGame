@@ -16,6 +16,7 @@ public class WorldRenderer extends WorldController {
     SpriteBatch batch;
     WorldController controller;
     BackgroundImage backgroundImg;
+    Controller cont;
 
     public WorldRenderer(WorldController wc)
     {
@@ -25,7 +26,7 @@ public class WorldRenderer extends WorldController {
         camera = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
         camera2 = new OrthographicCamera(Constants.VIEWPORT_WIDTH/5, Constants.VIEWPORT_HEIGHT/5);
         camera2.position.set(0,0,0);
-
+        cont = new Controller(camera);
         camera.position.set(0,0,0);
         camera.update();
         resize(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
@@ -62,8 +63,8 @@ public class WorldRenderer extends WorldController {
         if (backgroundImg.yCoordBg1 >= 0) {
             backgroundImg.yCoordBg1 = backgroundImg.yMax*(-1); backgroundImg.yCoordBg2 = 0;
         }
-        batch.draw(backgroundImg.background1, -10, backgroundImg.yCoordBg1, 20, 15);
-        batch.draw(backgroundImg.background2, -10, backgroundImg.yCoordBg2, 20, 15);
+        batch.draw(backgroundImg.background1, -10, backgroundImg.yCoordBg1, Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
+        batch.draw(backgroundImg.background2, -10, backgroundImg.yCoordBg2, Constants.VIEWPORT_HEIGHT, Constants.VIEWPORT_WIDTH);
 
         for(Bullet bul: controller.bullets) {
             bul.render(batch);

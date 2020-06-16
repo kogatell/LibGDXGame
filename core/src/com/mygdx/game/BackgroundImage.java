@@ -13,12 +13,12 @@ public class BackgroundImage{
     Texture background1, background2;
     SpriteBatch batch;
     public  float yMax, yCoordBg1, yCoordBg2;
-    final int BACKGROUND_MOVE_SPEED = 3;
+    final int BACKGROUND_MOVE_SPEED = 1;
     BackgroundImage(float z)
     {
         background1 = new Texture(Gdx.files.internal("prev-Space-Background-1.jpg"));
         background2 = new Texture(Gdx.files.internal("prev-Space-Background-1.jpg")); // identical
-        yMax = 15;
+        yMax = 12;
         yCoordBg1 = yMax*(-1); yCoordBg2 = 0;
     }
     /*public void Update(float deltaTime)

@@ -24,10 +24,10 @@ public class ScrollingBackground {
         image = new Texture("stars_background.png");
 
         y1 = 0;
-        y2 = image.getHeight();
+        y2 = image.getHeight() * 2;
         speed = 0;
         goalSpeed = DEFAULT_SPEED;
-        imageScale = Constants.VIEWPORT_WIDTH / image.getWidth();
+        imageScale = Constants.VIEWPORT_WIDTH * 3 / image.getWidth();
         speedFixed = true;
     }
 
