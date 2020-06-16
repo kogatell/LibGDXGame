@@ -39,7 +39,8 @@ public class InputScreen implements GestureDetector.GestureListener, EventListen
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
         if(player == null) return false;
-        player.position.x = WorldRenderer.camera.unproject(new Vector3(x-22, y, 0)).x;
+        //player.position.x = WorldRenderer.camera.unproject(new Vector3(x-22, y, 0)).x;
+        player.position.x = WorldRenderer.camera.getInputInGameWorld().x - player.width/2;
         //Gdx.app.error("cojones", player.position.y+ "position");
         return false;
     }

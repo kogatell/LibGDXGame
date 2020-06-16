@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class GameObject {
     public float speed;
     public float width;
     public float height;
+    float _x;
     float animationSpeed;
     float shootWaitTime;
     float shootingTimer;
@@ -30,12 +32,14 @@ public class GameObject {
     public void update(float delta){
 
     }
-    public void lookAt(Player target) {
+    public float lookAt(Vector2 target) {
 
-        float angle = (float) Math.atan2(target.position.y - this.position.y, target.position.x - this.position.x);
+        float angle = (float) Math.atan2(target.y - this.position.y, target.x - this.position.x);
         angle = (float) (angle * (180 / Math.PI));
-
+        _x = MathUtils.cos(angle);
         setAngle(angle);
+        this.position.x += _x;
+        return _x;
 
     }
 

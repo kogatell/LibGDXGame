@@ -17,16 +17,16 @@ public class Controller extends InputScreen{
     Stage stage;
     boolean leftPressed, rightPressed;
     OrthographicCamera camera;
-    public Controller(OrthographicCamera camera)
+    public Controller(OrthographicCamera camera, WorldRenderer w)
     {
         viewport = new FitViewport(800, 480, camera);
-        stage = new Stage(viewport, WorldRenderer.batch);
+        stage = new Stage(viewport, w.batch);
         Gdx.input.setInputProcessor(stage);
 
         Table table = new Table();
         table.left().bottom();
 
-        final Image rightImage = new Image(new Texture(""));
+        final Image rightImage = new Image(new Texture("rightarrow.png"));
         rightImage.setSize(50, 50);
         rightImage.addListener(new InputListener()
         {
@@ -42,7 +42,7 @@ public class Controller extends InputScreen{
             }
         });
 
-        Image leftImage = new Image((new Texture("")));
+        Image leftImage = new Image((new Texture("leftarrow.png")));
         leftImage.setSize(50, 50);
         leftImage.addListener(new InputListener(){
             @Override
@@ -75,6 +75,10 @@ public class Controller extends InputScreen{
     public void resize(int width, int height)
     {
         viewport.update(width, height);
+    }
+    public void draw()
+    {
+        stage.draw();
     }
 }
 

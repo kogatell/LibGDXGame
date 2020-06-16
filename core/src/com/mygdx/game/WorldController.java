@@ -2,8 +2,10 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 
 
 import java.lang.reflect.Array;
@@ -37,9 +39,14 @@ public class WorldController {
     public static final float  MAX_CHASE_ENEMY_SPAWN_TIME = 3f;
     public boolean gameOver;
     Random random;
+    private Music music;
 
     public WorldController(){
         //boolean canShoot = true;
+        music = Gdx.audio.newMusic((Gdx.files.internal("newnew.mp3"))); //prod by me
+        music.setLooping(true);
+        music.setVolume(0.1f);
+        music.play();
         bullets = new ArrayList<Bullet>();
         gameOver = false;
         boolean doubleShoot = false;
@@ -56,10 +63,11 @@ public class WorldController {
         gameObjects.add(player);
     }
     public void update(float deltaTime){
+        Vector2 playercopy = player.position.cpy();
         //s.rotate(45.0f * deltaTime);
         if (isShooting() && canShoot && !doubleShoot)
         {
-            gameObjects.add(new Bullet(player.position.x));
+            gameObjects.add(new Bullet(player.position.x + player.width / 2, player.position.y - Bullet.HEIGHT));
             //bullets.add(new Bullet(player.position.x));
         }
         if(isShielding())
@@ -83,9 +91,9 @@ public class WorldController {
             }
         }
         if (isShooting() && canShoot && doubleShoot) {
-            gameObjects.add(new Bullet(player.position.x + player.WIDTH));
-            gameObjects.add(new Bullet(player.position.x));
-            gameObjects.add(new Bullet((player.position.x - player.WIDTH)));
+            gameObjects.add(new Bullet(player.position.x + player.WIDTH, player.position.y - Bullet.HEIGHT));
+            gameObjects.add(new Bullet(player.position.x, player.position.y - Bullet.HEIGHT));
+            gameObjects.add(new Bullet(player.position.x, player.position.y - Bullet.HEIGHT));
         }
         if(health <= 0)
         {
@@ -117,17 +125,19 @@ public class WorldController {
         {
             Gdx.app.error("Hola","Creo Chase Enemy");
             chaseEnemySpawnTimeTimer = random.nextFloat() * (MAX_CHASE_ENEMY_SPAWN_TIME - MIN_CHASE_ENEMY_SPAWN_TIME) + MIN_CHASE_ENEMY_SPAWN_TIME;
-            gameObjects.add(new ChaseEnemy(random.nextInt( (int) ((2*Constants.VIEWPORT_WIDTH) - ChaseEnemy.WIDTH)) - (Constants.VIEWPORT_WIDTH - ChaseEnemy.WIDTH)));
+            gameObjects.add(new ChaseEnemy(random.nextInt( (int) ((2*Constants.VIEWPORT_WIDTH) - ChaseEnemy.WIDTH)) - (Constants.VIEWPORT_WIDTH - ChaseEnemy.WIDTH), playercopy));
         }
         for(GameObject go: gameObjects)
         {
             go.update(deltaTime);
         }
+
         ArrayList<GameObject> gameObjectsCopy = (ArrayList<GameObject>) gameObjects.clone();
         for (GameObject go: gameObjectsCopy){
             if(go.typeOfGO == 7)
             {
-                go.lookAt(player);
+
+                go.lookAt(playercopy);
 
             }
             if(go.typeOfGO == 4) {

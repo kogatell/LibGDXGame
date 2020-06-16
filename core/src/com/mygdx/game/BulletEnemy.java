@@ -12,8 +12,8 @@ public class BulletEnemy extends GameObject {
 
     public int SPEED = 6;
     public static final float DEFAULT_Y = -1.75f;
-    public static final float WIDTH = 0.5f;
-    public static final float HEIGHT = 0.5f;
+    public static final float WIDTH = 3;
+    public static final float HEIGHT = 3;
     private static Sprite texture;
 
     float x, y;

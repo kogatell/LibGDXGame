@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class DoubleShootPowerUp extends GameObject{
 
     public static final float SPEED = 2;
-    public static final float WIDTH = 0.25f;
-    public static final float HEIGHT = 0.25f;
+    public static final float WIDTH = 3f;
+    public static final float HEIGHT = 3f;
     private static Sprite texture;
 
     float x, y;

@@ -1,8 +1,8 @@
 package com.mygdx.game;
 
 public class Constants {
-    public static final float VIEWPORT_WIDTH = 25;
-    public static final float VIEWPORT_HEIGHT = 25;
+    public static final int VIEWPORT_WIDTH = 50;
+    public static final int VIEWPORT_HEIGHT = 50;
     public float GetViewPortWidth()
     {
         return VIEWPORT_WIDTH;

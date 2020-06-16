@@ -12,8 +12,8 @@ import java.util.Random;
 public class ShootingEnemy extends GameObject{
 
     public static final int SPEED = 3;
-    public static final float WIDTH = 0.5f;
-    public static final float HEIGHT = 0.5f;
+    public static final float WIDTH = 2;
+    public static final float HEIGHT = 2;
     private static Sprite texture;
 
 

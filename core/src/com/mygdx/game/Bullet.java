@@ -12,17 +12,17 @@ public class Bullet extends GameObject {
 
     public int SPEED = 10;
     public static final float DEFAULT_Y = -1.75f;
-    public static final float WIDTH = 0.5f;
-    public static final float HEIGHT = 0.5f;
+    public static final float WIDTH = 3;
+    public static final float HEIGHT = 3;
     private static Sprite texture;
 
     float x, y;
     Collision col;
     public boolean remove = false;
 
-    public Bullet (float x) {
+    public Bullet (float x, float y) {
         this.position.x = x;
-        this.position.y = DEFAULT_Y;
+        this.position.y = y;
         this.width = WIDTH;
         this.height = HEIGHT;
         texture = new Sprite(new Texture("mega-laser-1.png"));
